@@ -89,11 +89,6 @@ export const IndexPageTemplate = ({
       
                 <div className="column is-12">
                   <BlogRoll />
-                  <div className="column is-12 has-text-centered">
-                    <Link className="btn" to="/blog">
-                      Read more
-                    </Link>
-                  </div>
                 </div>
               </div>
             </div>
@@ -163,20 +158,8 @@ export const pageQuery = graphql`
           description
         }
         description
-        intro {
-          blurbs {
-            image {
-              childImageSharp {
-                fluid(maxWidth: 240, quality: 64) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-            text
-          }
           heading
           description
-        }
       }
     }
   }
