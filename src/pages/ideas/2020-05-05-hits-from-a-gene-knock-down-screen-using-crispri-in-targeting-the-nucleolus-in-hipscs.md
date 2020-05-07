@@ -18,3 +18,5 @@ tags:
   - FBL
   - NPM1
 ---
+
+This set of genes were picked based on a flow-based readout and hits were identified by sequencing and bioinformatics analysis. Validation of hits for disrupting the nucleolus has not been validated.

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
-import Features from '../components/Features'
 import BlogRoll from '../components/BlogRoll'
+import { HTMLContent } from '../components/Content'
 
 export const IndexPageTemplate = ({
   image,
@@ -13,8 +13,8 @@ export const IndexPageTemplate = ({
   subheading,
   mainpitch,
   description,
-  intro,
-}) => (
+}) => { 
+  return (
   <div>
     <div
       className="full-width-image margin-top-0"
@@ -83,7 +83,7 @@ export const IndexPageTemplate = ({
                     <h3 className="has-text-weight-semibold is-size-3">
                       {heading}
                     </h3>
-                    <p>{description}</p>
+                    <HTMLContent content={description}/>
                   </div>
                 </div>
       
@@ -97,7 +97,7 @@ export const IndexPageTemplate = ({
       </div>
     </section>
   </div>
-)
+)}
 
 IndexPageTemplate.propTypes = {
   image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -113,7 +113,6 @@ IndexPageTemplate.propTypes = {
 
 const IndexPage = ({ data }) => {
   const { frontmatter } = data.markdownRemark
-
   return (
     <Layout>
       <IndexPageTemplate
@@ -122,7 +121,7 @@ const IndexPage = ({ data }) => {
         heading={frontmatter.heading}
         subheading={frontmatter.subheading}
         mainpitch={frontmatter.mainpitch}
-        description={frontmatter.description}
+        description={data.markdownRemark.html}
         intro={frontmatter.intro}
       />
     </Layout>
@@ -142,6 +141,7 @@ export default IndexPage
 export const pageQuery = graphql`
   query IndexPageTemplate {
     markdownRemark(frontmatter: { templateKey: { eq: "index-page" } }) {
+      html
       frontmatter {
         title
         image {
@@ -157,9 +157,6 @@ export const pageQuery = graphql`
           title
           description
         }
-        description
-          heading
-          description
       }
     }
   }

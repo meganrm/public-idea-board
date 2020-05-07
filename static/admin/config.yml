@@ -30,6 +30,7 @@ collections:
       - {label: "Description", name: "description", widget: "markdown"}
       - {label: "How to collaborate", name: "contact", widget: "string"}
       - {label: "Tags", name: "tags", widget: "list"}
+      - {label: "Description", name: "body", widget: "markdown"}
 
   - name: "pages"
     label: "Pages"
@@ -44,7 +45,7 @@ collections:
           - {label: Heading, name: heading, widget: string}
           - {label: Subheading, name: subheading, widget: string}
           - {label: Mainpitch, name: mainpitch, widget: object, fields: [{label: Title, name: title, widget: string}, {label: Description, name: description, widget: text}]}
-          - {label: Description, name: description, widget: markdown}
+          - {label: Legend, name: body, widget: markdown}
       - file: "src/pages/about/index.md"
         label: "About"
         name: "about"
