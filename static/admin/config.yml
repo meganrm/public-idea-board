@@ -31,7 +31,36 @@ collections:
       - {label: "How to collaborate", name: "contact", widget: "string"}
       - {label: "Tags", name: "tags", widget: "list"}
       - {label: "Description", name: "body", widget: "markdown"}
-
+  - name: "projects"
+    label: "Projects"
+    folder: "src/pages/projects"
+    create: true
+    fields:
+      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "project-page"}
+      - {label: Title, name: title, widget: string}
+      - {label: Goals, name: goals, widget: object,
+          fields: [{label: High Level Goals, name: high level, widget: string}, {label: SMART goals, name: smart goals, widget: text}]
+      }
+      - {label: Roles and Responsibilities, name: roles, widget: object, 
+          fields: [
+            {label: Scientific Lead, name: scientific lead, widget: string}, 
+            {label: Scientific Project Lead, name: scientific project lead, widget: text},
+            {label: Team Ambassadors, name: team ambassadors, widget: text},
+            {label: Project Managers, name: project managers, widget: text}
+            ]
+      }
+      - {label: Working groups, name: groups, widget: object,
+          fields: [
+            {label: Launch Material, name: launch material, widget: string}, 
+            {label: Weekly working groups, name: weekly working groups, widget: text},
+            {label: Team Ambassadors, name: team ambassadors, widget: text},
+            {label: Agenda for next working group meeting, name: agenda, widget: text},
+            {label: Working groups presentations and summaries, name: summaries, widget: text},
+            ]
+      }
+      - {label: Current datasets, name: datasets, widget: string}
+      - {label: Mainpitch, name: mainpitch, widget: object, fields: [{label: Title, name: title, widget: string}, {label: Description, name: description, widget: text}]}
+      - {label: Legend, name: body, widget: markdown}
   - name: "pages"
     label: "Pages"
     files:
