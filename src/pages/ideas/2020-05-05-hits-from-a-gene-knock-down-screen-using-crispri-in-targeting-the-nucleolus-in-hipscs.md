@@ -5,7 +5,7 @@ title: Hits from a gene knock-down screen using CRISPRi in targeting the
 status: in progress to validate top hits
 date: 2020-05-05T17:04:24.237Z
 type: Early dataset
-featuredpost: true
+featuredpost: false
 featuredimage: /img/228469011.jpg
 description: This set of genes were picked based on a flow-based readout and
   hits were identified by sequencing and bioinformatics analysis. Validation of
