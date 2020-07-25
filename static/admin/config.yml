@@ -76,8 +76,7 @@ collections:
         label: Project,
         required: true,
         collection: projects,
-        valueField: id,
-        displayFields: ["{{title}}"],
+        valueField: "{{slug}}",
         searchFields: ["title"],
         multiple: false
       }
