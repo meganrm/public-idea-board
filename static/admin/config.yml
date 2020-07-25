@@ -76,7 +76,8 @@ collections:
         required: true,
         collection: projects,
         valueField: title,
-        searchFields: ["title"],
+        searchFields: ["title"]
+      }
   - name: "meetings"
     label: "Meetings"
     create: true
@@ -90,8 +91,7 @@ collections:
       - {widget: date,
         name: date,
         label: Date,
-        required: true
-          }
+        required: true}
       - {widget: relation,
         name: project,
         label: Project,
