@@ -90,11 +90,16 @@ export const pageQuery = graphql`
       html
       frontmatter {
         title
-        goals: {
-            high level
-            smart goals
+        goals {
+            high_level
+            smart_goals
         }
-        roles
+        roles {
+            scientific_lead
+            scientific_project_lead
+            team_ambassadors
+            project_managers
+        }
       }
     }
   }
