@@ -83,6 +83,11 @@ collections:
     create: true
     folder: "src/pages/meetings"
     fields:
+      - {
+        name: title,
+        label: Meeting type/name,
+        widget: string,
+      }
       - {widget: date,
         name: date,
         label: Date,
