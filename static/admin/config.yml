@@ -74,8 +74,6 @@ collections:
         name: project,
         label: Project,
         required: true,
-        hint: >-
-          The project this dataset is connected to,
         collection: projects,
         valueField: slug,
         searchFields: ["title"],
@@ -88,15 +86,12 @@ collections:
       - {widget: date,
         name: date,
         label: Date,
-        required: true,
-        hint: >-
-          The date the post is published}
+        required: true
+          }
       - {widget: relation,
         name: project,
         label: Project,
         required: true,
-        hint: >-
-          The project this meeting is connected to,
         collection: projects,
         valueField: slug,
         searchFields: ["title"],
