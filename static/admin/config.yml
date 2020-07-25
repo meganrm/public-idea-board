@@ -34,14 +34,17 @@ collections:
   - name: "projects"
     label: "Projects"
     folder: "src/pages/projects"
+    slug: "{{title}}"
     create: true
     fields:
       - {label: "Template Key", name: "templateKey", widget: "hidden", default: "project-page"}
       - {label: Title, name: title, widget: string}
-      - {label: Goals, name: goals, widget: object,
-          fields: [{label: High Level Goals, name: high level, widget: string}, {label: SMART goals, name: smart goals, widget: text}]
+      - {required: false, label: Goals, name: goals, widget: object,
+          fields: [
+            {label: High Level Goals, name: high level, widget: string}, {label: SMART goals, name: smart goals, widget: text}
+            ]
       }
-      - {label: Roles and Responsibilities, name: roles, widget: object, 
+      - {required: false, label: Roles and Responsibilities, name: roles, widget: object, 
           fields: [
             {label: Scientific Lead, name: scientific lead, widget: string}, 
             {label: Scientific Project Lead, name: scientific project lead, widget: text},
@@ -49,7 +52,7 @@ collections:
             {label: Project Managers, name: project managers, widget: text}
             ]
       }
-      - {label: Working groups, name: groups, widget: object,
+      - {required: false, label: Working groups, name: groups, widget: object,
           fields: [
             {label: Launch Material, name: launch material, widget: string}, 
             {label: Weekly working groups, name: weekly working groups, widget: text},
@@ -59,8 +62,54 @@ collections:
             ]
       }
       - {label: Current datasets, name: datasets, widget: string}
-      - {label: Mainpitch, name: mainpitch, widget: object, fields: [{label: Title, name: title, widget: string}, {label: Description, name: description, widget: text}]}
-      - {label: Legend, name: body, widget: markdown}
+  - name: "datasets"
+    label: "Datasets"
+    create: true
+    folder: "src/pages/datasets"
+    slug: "{{project}}-{{link}}"
+    fields:
+      - {label: Title, name: title, widget: string}
+      - {label: Link, name: link, widget: string}
+      - {widget: relation,
+        name: project,
+        label: Project,
+        required: true,
+        hint: >-
+          The project this dataset is connected to,
+        collection: projects,
+        valueField: slug,
+        searchFields: ["title"],
+        displayFields: ["title"]}
+  - name: "meetings"
+    label: "Meetings"
+    create: true
+    folder: "src/pages/meetings"
+    fields:
+      - {widget: date,
+        name: date,
+        label: Date,
+        required: true,
+        hint: >-
+          The date the post is published}
+      - {widget: relation,
+        name: project,
+        label: Project,
+        required: true,
+        hint: >-
+          The project this meeting is connected to,
+        collection: projects,
+        valueField: slug,
+        searchFields: ["title"],
+        displayFields: ["title"]}
+      - {widget: markdown,
+        name: agenda,
+        label: Agenda,
+      }
+      - {widget: markdown,
+        name: body,
+        label: Notes and action items,
+        required: false
+      }
   - name: "pages"
     label: "Pages"
     files:
