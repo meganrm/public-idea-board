@@ -63,11 +63,12 @@ collections:
       }
       - {label: Current datasets, name: datasets, widget: string}
   - name: "datasets"
-    label: "Datasets"
+    label: "Datasets and resources"
     create: true
     folder: "src/pages/datasets"
     slug: "{{project}}-{{link}}"
     fields:
+      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "dataset"}
       - {label: Title, name: title, widget: string}
       - {label: Link, name: link, widget: string}
       - {widget: relation,
@@ -75,14 +76,21 @@ collections:
         label: Project,
         required: true,
         collection: projects,
-        valueField: title,
+        valueField: id,
         searchFields: ["title"]
+      }
+      - {
+        widget: markdown,
+        label: Description, 
+        required: false,
+        name: body
       }
   - name: "meetings"
     label: "Meetings"
     create: true
     folder: "src/pages/meetings"
     fields:
+      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "meeting"}
       - {
         name: title,
         label: Meeting type/name,
@@ -97,7 +105,7 @@ collections:
         label: Project,
         required: true,
         collection: projects,
-        valueField: title,
+        valueField: id,
         searchFields: ["title"]
       }
       - {widget: markdown,

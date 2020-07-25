@@ -1,4 +1,5 @@
 import React from 'react'
+import { map } from 'lodash';
 import PropTypes from 'prop-types'
 import { kebabCase } from 'lodash'
 import { Helmet } from 'react-helmet'
@@ -11,6 +12,8 @@ export const ProjectTemplate = ({
   contentComponent,
   tags,
   title,
+  goals,
+  roles,
   helmet,
 }) => {
   const PostContent = contentComponent || Content
@@ -24,6 +27,11 @@ export const ProjectTemplate = ({
             <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
               {title} 
             </h1>
+            <ul>
+              {map(goals, (value, key) => (
+                <li key={key}>{key}: {value}</li>)
+              )}
+            </ul>
             <PostContent content={content} />
             {tags && tags.length ? (
               <div style={{ marginTop: `4rem` }}>
@@ -53,13 +61,15 @@ ProjectTemplate.propTypes = {
 }
 
 const Project = ({ data }) => {
+  console.log(data)
   const { markdownRemark: post } = data
   return (
     <Layout>
       <ProjectTemplate
         content={post.html}
         contentComponent={HTMLContent}
-        description={post.frontmatter.description}
+        goals={post.frontmatter.goals}
+        roles={post.frontmatter.roles}
         helmet={
           <Helmet titleTemplate="%s | Blog">
             <title>{`${post.frontmatter.title}`}</title>
@@ -101,6 +111,30 @@ export const pageQuery = graphql`
             project_managers
         }
       }
+    
     }
+allMarkdownRemark(
+  filter: {
+    frontmatter: {
+      project: {
+        eq: $id
+      }
+    }
+  }
+) {
+  edges {
+    node {
+      excerpt(pruneLength: 400)
+      id
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+    
+      }
+    }
+  }
+}
   }
 `
