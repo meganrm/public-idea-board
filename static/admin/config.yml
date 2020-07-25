@@ -77,7 +77,7 @@ collections:
         required: true,
         collection: projects,
         valueField: id,
-        displayValue: title,
+        displayFields: ["title"],
         searchFields: ["title"]
       }
       - {
@@ -107,7 +107,7 @@ collections:
         required: true,
         collection: projects,
         valueField: id,
-        displayValue: title,
+        displayFields: ["title"],
         searchFields: ["title"]
       }
       - {widget: markdown,
