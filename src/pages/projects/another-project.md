@@ -20,4 +20,3 @@ mainpitch:
   title: Title
   description: Descriptoin
 ---
-Legend

@@ -85,3 +85,61 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     })
   }
 }
+
+exports.sourceNodes = ({
+  boundActionCreators,
+  getNodes,
+  getNode
+}) => {
+  const {
+    createNodeField
+  } = boundActionCreators;
+
+  const datasetsOfProjects = {};
+  const meetingsOfProjects = {};
+  // iterate thorugh all markdown nodes to link datasets to project
+  const markdownNodes = getNodes()
+    .filter(node => node.internal.type === "MarkdownRemark")
+    .forEach(node => {
+      if (node.frontmatter.project) {
+        const projectNode = getNodes().find(
+          node2 =>
+          node2.internal.type === "MarkdownRemark" &&
+          node2.frontmatter.title === node.frontmatter.project
+        );
+
+        if (projectNode) {
+          createNodeField({
+            node,
+            name: "project",
+            value: projectNode.id,
+          });
+          const objectToUse = node.frontmatter.templateKey === 'meeting' ? meetingsOfProjects : datasetsOfProjects;
+        
+
+          // if it's first time for this author init empty array for his posts
+          if (!(projectNode.id in objectToUse)) {
+            objectToUse[projectNode.id] = [];
+          }
+          // add book to this author
+          objectToUse[projectNode.id].push(node.id);
+        }
+      }
+    });
+  Object.entries(datasetsOfProjects).forEach(([projectId, datasetIds]) => {
+    console.log(getNode(projectId), datasetIds)
+    createNodeField({
+      node: getNode(projectId),
+      name: "datasets",
+      value: datasetIds,
+    });
+  });
+  Object.entries(meetingsOfProjects).forEach(([projectId, meetingIds]) => {
+    console.log(getNode(projectId), meetingIds)
+    createNodeField({
+      node: getNode(projectId),
+      name: "meetings",
+      value: meetingIds,
+    });
+  });
+};

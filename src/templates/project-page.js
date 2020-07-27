@@ -15,9 +15,10 @@ export const ProjectTemplate = ({
   goals,
   roles,
   helmet,
+  datasets
 }) => {
   const PostContent = contentComponent || Content
-
+  console.log(datasets)
   return (
     <section className="section">
       {helmet || ''}
@@ -31,6 +32,14 @@ export const ProjectTemplate = ({
               {map(goals, (value, key) => (
                 <li key={key}>{key}: {value}</li>)
               )}
+            </ul>
+            <ul className="datasets">
+              {datasets.map((dataset) => (
+                <li key={dataset.id + `tag`}>
+                  <Link to={`/tags/${kebabCase(dataset.frontmatter.link)}/`}>{dataset.frontmatter.title}</Link>
+                  {dataset.html && <PostContent content={dataset.html} />}
+                </li>
+              ))}
             </ul>
             <PostContent content={content} />
             {tags && tags.length ? (
@@ -61,25 +70,30 @@ ProjectTemplate.propTypes = {
 }
 
 const Project = ({ data }) => {
-  console.log(data)
-  const { markdownRemark: post } = data
+  const { markdownRemark: project } = data
+  console.log(project);
+  const {
+    datasets
+  } = project.fields;
+
   return (
     <Layout>
       <ProjectTemplate
-        content={post.html}
+        content={project.html}
         contentComponent={HTMLContent}
-        goals={post.frontmatter.goals}
-        roles={post.frontmatter.roles}
+        goals={project.frontmatter.goals}
+        roles={project.frontmatter.roles}
+        datasets={datasets}
         helmet={
           <Helmet titleTemplate="%s | Blog">
-            <title>{`${post.frontmatter.title}`}</title>
+            <title>{`${project.frontmatter.title}`}</title>
             <meta
               name="description"
-              content={`${post.frontmatter.goals["high level"]}`}
+              content={`${project.frontmatter.goals["high level"]}`}
             />
           </Helmet>
         }
-        title={post.frontmatter.title}
+        title={project.frontmatter.title}
       />
     </Layout>
   )
@@ -98,8 +112,20 @@ export const pageQuery = graphql`
     markdownRemark(id: { eq: $id }) {
       id
       html
+      fields {
+        datasets {
+          id
+          html
+          frontmatter {
+            title
+            link
+            description
+          }
+        }
+      }
       frontmatter {
         title
+        datasets
         goals {
             high_level
             smart_goals
@@ -111,30 +137,6 @@ export const pageQuery = graphql`
             project_managers
         }
       }
-    
     }
-allMarkdownRemark(
-  filter: {
-    frontmatter: {
-      project: {
-        eq: $id
-      }
-    }
-  }
-) {
-  edges {
-    node {
-      excerpt(pruneLength: 400)
-      id
-      fields {
-        slug
-      }
-      frontmatter {
-        title
-    
-      }
-    }
-  }
-}
   }
 `
