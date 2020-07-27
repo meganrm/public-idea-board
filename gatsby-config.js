@@ -1,13 +1,13 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby + Netlify CMS Starter',
-    description:
-      'This repo contains an example business website that is built with Gatsby, and Netlify CMS.It follows the JAMstack architecture by using Git as a single source of truth, and Netlify for continuous deployment, and CDN distribution.',
+    title: 'Allen Institute for Cell Science projects and ideas',
+    description: 'A site for both sharing and tracking our projects and ideas'
   },
   mapping: {
       "MarkdownRemark.fields.project": "MarkdownRemark",
       "MarkdownRemark.fields.datasets": "MarkdownRemark",
       "MarkdownRemark.fields.meetings": "MarkdownRemark",
+      'MarkdownRemark.frontmatter.project': `MarkdownRemark.frontmatter.project_id`
   },
   plugins: [
     'gatsby-plugin-react-helmet',
