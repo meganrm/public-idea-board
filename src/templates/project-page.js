@@ -27,11 +27,12 @@ export const ProjectTemplate = ({
             <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
               {title} 
             </h1>
-            <ul>
-              {map(goals, (value, key) => (
-                <li key={key}>{key}: {value}</li>)
-              )}
-            </ul>
+            <h4>
+              High Level Goals: {goals.high_level}
+            </h4>
+            <h4>
+              Related SMART Goals: {goals.smart_goals}
+            </h4>
             <ul className="unstyled-list">
               {datasets && datasets.map((dataset) => (
                 <li key={dataset.id + `tag`} className="box">
