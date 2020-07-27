@@ -1,6 +1,6 @@
 ---
 templateKey: project-page
-title: New title for this project
+title: Another Project
 goals:
   high level: High level goals
   smart goals: Smart goals
@@ -15,7 +15,6 @@ groups:
   team ambassadors: Team ambassadors
   agenda: Agenda
   summaries: Summaries
-datasets: datasets
 mainpitch:
   title: Title
   description: Descriptoin
