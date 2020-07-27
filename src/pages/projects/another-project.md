@@ -1,6 +1,6 @@
 ---
 templateKey: project-page
-title: Another Project
+title: New title for this project
 goals:
   high level: High level goals
   smart goals: Smart goals
