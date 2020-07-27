@@ -139,3 +139,10 @@ collections:
           - {label: "Template Key", name: "templateKey", widget: "hidden", default: "about-page"}
           - {label: "Title", name: "title", widget: "string"}
           - {label: "Body", name: "body", widget: "markdown"}
+      - file: "src/pages/all-projects.md"
+        label: "Projects"
+        name: "all-projects"
+        fields:
+          - {label: "Template Key", name: "templateKey", widget: "hidden", default: "all-projects-page"}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Body", name: "body", widget: "markdown"}

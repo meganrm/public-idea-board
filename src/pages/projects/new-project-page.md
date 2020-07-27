@@ -15,8 +15,4 @@ groups:
   team ambassadors: Team ambassadors
   agenda: Agenda
   summaries: Summaries
-datasets: Link to current dataset
-mainpitch:
-  title: Title
-  description: Descriptoin
 ---

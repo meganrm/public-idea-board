@@ -33,9 +33,9 @@ export const ProjectTemplate = ({
                 <li key={key}>{key}: {value}</li>)
               )}
             </ul>
-            <ul className="datasets">
+            <ul className="unstyled-list">
               {datasets.map((dataset) => (
-                <li key={dataset.id + `tag`}>
+                <li key={dataset.id + `tag`} className="box">
                   <Link to={`/tags/${kebabCase(dataset.frontmatter.link)}/`}>{dataset.frontmatter.title}</Link>
                   {dataset.html && <PostContent content={dataset.html} />}
                 </li>
