@@ -97,7 +97,7 @@ exports.sourceNodes = ({
 
   const datasetsOfProjects = {};
   const meetingsOfProjects = {};
-  // iterate thorugh all markdown nodes to link datasets to project
+  // iterate through all markdown nodes to link datasets to project
   const markdownNodes = getNodes()
     .filter(node => node.internal.type === "MarkdownRemark")
     .forEach(node => {
@@ -117,17 +117,14 @@ exports.sourceNodes = ({
           const objectToUse = node.frontmatter.templateKey === 'meeting' ? meetingsOfProjects : datasetsOfProjects;
         
 
-          // if it's first time for this author init empty array for his posts
           if (!(projectNode.id in objectToUse)) {
             objectToUse[projectNode.id] = [];
           }
-          // add book to this author
           objectToUse[projectNode.id].push(node.id);
         }
       }
     });
   Object.entries(datasetsOfProjects).forEach(([projectId, datasetIds]) => {
-    console.log(getNode(projectId), datasetIds)
     createNodeField({
       node: getNode(projectId),
       name: "datasets",
@@ -135,7 +132,6 @@ exports.sourceNodes = ({
     });
   });
   Object.entries(meetingsOfProjects).forEach(([projectId, meetingIds]) => {
-    console.log(getNode(projectId), meetingIds)
     createNodeField({
       node: getNode(projectId),
       name: "meetings",
