@@ -18,7 +18,6 @@ export const ProjectTemplate = ({
   datasets
 }) => {
   const PostContent = contentComponent || Content
-  console.log(datasets)
   return (
     <section className="section">
       {helmet || ''}
@@ -34,7 +33,7 @@ export const ProjectTemplate = ({
               )}
             </ul>
             <ul className="unstyled-list">
-              {datasets.map((dataset) => (
+              {datasets && datasets.map((dataset) => (
                 <li key={dataset.id + `tag`} className="box">
                   <Link to={`/tags/${kebabCase(dataset.frontmatter.link)}/`}>{dataset.frontmatter.title}</Link>
                   {dataset.html && <PostContent content={dataset.html} />}
