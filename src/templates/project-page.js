@@ -39,8 +39,8 @@ export const ProjectTemplate = ({
             </h3>
             <ul className="unstyled-list">
               {datasets && datasets.map((dataset) => (
-                <li key={dataset.id + `tag`} className="box">
-                  <Link to={`/tags/${kebabCase(dataset.frontmatter.link)}/`}>{dataset.frontmatter.title}</Link>
+                <li key={dataset.id} className="box">
+                  <a href={dataset.frontmatter.link}>{dataset.frontmatter.title}</a>
                   {dataset.html && <PostContent content={dataset.html} />}
                 </li>
               ))}
@@ -103,7 +103,7 @@ const Project = ({ data }) => {
             <title>{`${project.frontmatter.title}`}</title>
             <meta
               name="description"
-              content={`${project.frontmatter.goals["high level"]}`}
+              content={`${project.frontmatter.goals.high_level}`}
             />
           </Helmet>
         }
@@ -147,7 +147,6 @@ export const pageQuery = graphql`
       }
       frontmatter {
         title
-        datasets
         goals {
             high_level
             smart_goals
