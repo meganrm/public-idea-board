@@ -15,7 +15,8 @@ export const ProjectTemplate = ({
   goals,
   roles,
   helmet,
-  datasets
+  datasets,
+  meetings
 }) => {
   const PostContent = contentComponent || Content
   return (
@@ -33,6 +34,9 @@ export const ProjectTemplate = ({
             <h4>
               Related SMART Goals: {goals.smart_goals}
             </h4>
+            <h3>
+              Datatsets and Resources
+            </h3>
             <ul className="unstyled-list">
               {datasets && datasets.map((dataset) => (
                 <li key={dataset.id + `tag`} className="box">
@@ -41,6 +45,15 @@ export const ProjectTemplate = ({
                 </li>
               ))}
             </ul>
+            <h3>
+              Past meetings
+            </h3>
+              {
+                meetings && meetings.map((meeting) => (
+                <li key={meeting.id + `tag`} className="box">
+                  {meeting.frontmatter.title}
+                </li>
+              ))}
             <PostContent content={content} />
             {tags && tags.length ? (
               <div style={{ marginTop: `4rem` }}>
@@ -71,9 +84,9 @@ ProjectTemplate.propTypes = {
 
 const Project = ({ data }) => {
   const { markdownRemark: project } = data
-  console.log(project);
   const {
-    datasets
+    datasets,
+    meetings
   } = project.fields;
 
   return (
@@ -84,6 +97,7 @@ const Project = ({ data }) => {
         goals={project.frontmatter.goals}
         roles={project.frontmatter.roles}
         datasets={datasets}
+        meetings={meetings || []}
         helmet={
           <Helmet titleTemplate="%s | Blog">
             <title>{`${project.frontmatter.title}`}</title>
@@ -120,6 +134,14 @@ export const pageQuery = graphql`
             title
             link
             description
+          }
+        }
+        meetings {
+          id
+          html
+          frontmatter {
+            title
+            date
           }
         }
       }
