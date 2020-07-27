@@ -97,7 +97,7 @@ collections:
     label: "People"
     create: true
     folder: "src/pages/people"
-    slug: "name"
+    slug: "{{name}}"
     fields:
       - {label: "Template Key", name: "templateKey", widget: "hidden", default: "people"}
       - {label: Title/Role, name: title, widget: string}
