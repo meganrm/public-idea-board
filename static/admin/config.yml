@@ -56,7 +56,14 @@ collections:
           fields: [
             {label: Launch Material, name: launch material, widget: string}, 
             {label: Weekly working groups, name: weekly working groups, widget: text},
-            {label: Team Ambassadors, name: team ambassadors, widget: text},
+            {
+              label: Team Ambassadors, 
+              name: team ambassadors, 
+              widget: relation,
+              valueField: name,
+              searchFields: ["name"],
+              multiple: true,
+            },
             {label: Agenda for next working group meeting, name: agenda, widget: text},
             {label: Working groups presentations and summaries, name: summaries, widget: text},
             ]
@@ -86,6 +93,15 @@ collections:
         required: false,
         name: body
       }
+  - name: "people"
+    label: "People"
+    create: true
+    folder: "src/pages/people"
+    slug: "name"
+    fields:
+      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "dataset"}
+      - {label: Title/Role, name: title, widget: string}
+      - {label: Full name, name: name, widget: string}
   - name: "meetings"
     label: "Meetings"
     create: true
