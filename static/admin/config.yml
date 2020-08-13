@@ -39,23 +39,24 @@ collections:
     fields:
       - {label: "Template Key", name: "templateKey", widget: "hidden", default: "project-page"}
       - {label: Title, name: title, widget: string}
-      - {required: false, label: Goals, name: goals, widget: object,
+      - {label: Goals, name: goals, widget: object,
           fields: [
-            {required: false, label: High Level Goals, name: high level, widget: string}, {required: false, label: SMART goals, name: smart goals, widget: text}
+            {label: High Level Goals, name: high level, widget: string}, {required: false, label: SMART goals, name: smart goals, widget: text}
             ]
       }
       - {required: false, label: Roles and Responsibilities, name: roles, widget: object, 
           fields: [
-            {label: Scientific Lead, name: scientific lead, widget: string}, 
-            {label: Scientific Project Lead, name: scientific project lead, widget: text},
-            {label: Team Ambassadors, name: team ambassadors, widget: text},
-            {label: Project Managers, name: project managers, widget: text}
+            {label: Project Managers, name: project managers, widget: text, required: false}
+            {label: Scientific Lead, name: scientific lead, widget: string, required: false}, 
+            {label: Team Ambassadors, name: team ambassadors, widget: text, required: false},
             ]
       }
       - {required: false, label: Working groups, name: groups, widget: object,
           fields: [
-            {label: Launch Material, name: launch material, widget: string}, 
-            {label: Weekly working groups, name: weekly working groups, widget: text},
+            {label: Launch Material, name: launch material, widget: string
+            required: false}, 
+            {label: Weekly working groups, name: weekly working groups, widget: text
+            required: false},
             {
               label: Team Ambassadors, 
               name: team ambassadors, 
@@ -63,12 +64,10 @@ collections:
               valueField: name,
               searchFields: ["name"],
               multiple: true,
+              required: false
             },
-            {label: Agenda for next working group meeting, name: agenda, widget: text},
-            {label: Working groups presentations and summaries, name: summaries, widget: text},
             ]
       }
-      - {label: Current datasets, name: datasets, widget: string}
   - name: "datasets"
     label: "Datasets and resources"
     create: true
