@@ -53,9 +53,9 @@ collections:
       }
       - {required: false, label: Working groups, name: groups, widget: object,
           fields: [
-            {label: Launch Material, name: launch material, widget: string
+            {label: Launch Material, name: launch material, widget: string,
             required: false}, 
-            {label: Weekly working groups, name: weekly working groups, widget: text
+            {label: Weekly working groups, name: weekly working groups, widget: text,
             required: false},
             {
               label: Team Ambassadors, 
