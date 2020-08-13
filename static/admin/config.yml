@@ -46,7 +46,7 @@ collections:
       }
       - {required: false, label: Roles and Responsibilities, name: roles, widget: object, 
           fields: [
-            {label: Project Managers, name: project managers, widget: text, required: false}
+            {label: Project Managers, name: project managers, widget: text, required: false},
             {label: Scientific Lead, name: scientific lead, widget: string, required: false}, 
             {label: Team Ambassadors, name: team ambassadors, widget: text, required: false},
             ]
