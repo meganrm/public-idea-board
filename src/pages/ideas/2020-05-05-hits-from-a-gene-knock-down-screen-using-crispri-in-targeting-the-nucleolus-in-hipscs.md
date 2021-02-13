@@ -7,6 +7,7 @@ date: 2020-05-05T17:04:24.237Z
 type: Early dataset
 featuredpost: false
 featuredimage: /img/228469011.jpg
+dataset: link to dataset
 description: This set of genes were picked based on a flow-based readout and
   hits were identified by sequencing and bioinformatics analysis. Validation of
   hits for disrupting the nucleolus has not been validated.
