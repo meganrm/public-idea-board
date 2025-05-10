@@ -62,7 +62,7 @@ $ netlify dev # or ntl dev
 Media Libraries have been included in this starter as a default. If you are not planning to use `Uploadcare` or `Cloudinary` in your project, you **can** remove them from module import and registration in `src/cms/cms.js`. Here is an example of the lines to comment or remove them your project.
 
 ```javascript
-import CMS from 'netlify-cms-app'
+import CMS from 'decap-cms-app'
 // import uploadcare from 'netlify-cms-media-library-uploadcare'
 // import cloudinary from 'netlify-cms-media-library-cloudinary'
 
