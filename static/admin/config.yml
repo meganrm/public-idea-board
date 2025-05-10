@@ -1,165 +1,145 @@
 backend:
-  name: git-gateway
-  branch: master
-  commit_messages:
-    create: 'Create {{collection}} “{{slug}}”'
-    update: 'Update {{collection}} “{{slug}}”'
-    delete: 'Delete {{collection}} “{{slug}}”'
-    uploadMedia: '[skip ci] Upload “{{path}}”'
-    deleteMedia: '[skip ci] Delete “{{path}}”'
+    name: git-gateway
+    branch: master
+    commit_messages:
+        create: "Create {{collection}} “{{slug}}”"
+        update: "Update {{collection}} “{{slug}}”"
+        delete: "Delete {{collection}} “{{slug}}”"
+        uploadMedia: "[skip ci] Upload “{{path}}”"
+        deleteMedia: "[skip ci] Delete “{{path}}”"
 
 media_folder: static/img
 public_folder: /img
 publish_mode: editorial_workflow
 
 collections:
-  - name: "ideas"
-    label: "Ideas"
-    folder: "src/pages/ideas"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "blog-post"}
-      - {label: "Question/Title", name: "title", widget: "string"}
-      - {label: "Data status", name: "data-status", widget: "string"}
-      - {label: "Data link", name: "data-link", widget: "string"}
-      - {label: "Data caveats", name: "data-caveats", widget: "string"}
-      - {label: "Program", name: "program", widget: "select", options: ["EMT", "Endo", "Other"]}
-      - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Type", name: "type", widget: "select", options: ["New idea/question", "Early dataset", "Observation"]}
-      - {label: "Contact", name: "contact", widget: "string"}
-      - {label: "Tags", name: "tags", widget: "list"}
-      - {label: "AICS concerns", name: "concerns", widget: "string"}
-      - {label: "Description, additional information", name: "body", widget: "markdown"}
-  - name: "projects"
-    label: "Projects"
-    folder: "src/pages/projects"
-    slug: "{{title}}"
-    create: true
-    fields:
-      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "project-page"}
-      - {label: Title, name: title, widget: string}
-      - {label: Goals, name: goals, widget: object,
-          fields: [
-            {label: High Level Goals, name: high level, widget: string}, {required: false, label: SMART goals, name: smart goals, widget: text}
-            ]
-      }
-      - {required: false, label: Roles and Responsibilities, name: roles, widget: object, 
-          fields: [
-            {label: Project Managers, name: project managers, widget: text, required: false},
-            {label: Scientific Lead, name: scientific lead, widget: string, required: false}, 
-            {label: Team Ambassadors, name: team ambassadors, widget: text, required: false},
-            ]
-      }
-      - {required: false, label: Working groups, name: groups, widget: object,
-          fields: [
-            {label: Launch Material, name: launch material, widget: string,
-            required: false}, 
-            {label: Weekly working groups, name: weekly working groups, widget: text,
-            required: false},
-            {
-              label: Team Ambassadors, 
-              name: team ambassadors, 
-              widget: relation,
-              valueField: name,
-              searchFields: ["name"],
-              multiple: true,
-              required: false
-            },
-            ]
-      }
-  - name: "datasets"
-    label: "Datasets and resources"
-    create: true
-    folder: "src/pages/datasets"
-    slug: "{{project}}-{{link}}"
-    fields:
-      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "dataset"}
-      - {label: Title, name: title, widget: string}
-      - {label: Link, name: link, widget: string}
-      - {widget: relation,
-        name: project,
-        label: Project,
-        required: true,
-        collection: projects,
-        valueField: title,
-        searchFields: ["title"],
-        multiple: false
-      }
-      - {
-        widget: markdown,
-        label: Description, 
-        required: false,
-        name: body
-      }
-  - name: "people"
-    label: "People"
-    create: true
-    folder: "src/pages/people"
-    slug: "{{name}}"
-    fields:
-      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "people"}
-      - {label: Title/Role, name: title, widget: string}
-      - {label: Full name, name: name, widget: string}
-      - {label: Slack ID, name: slack, widget: string}
-      - {label: Email, name: email, widget: string}
-  - name: "meetings"
-    label: "Meetings"
-    create: true
-    folder: "src/pages/meetings"
-    fields:
-      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "meeting"}
-      - {
-        name: title,
-        label: Meeting type/name,
-        widget: string,
-      }
-      - {widget: date,
-        name: date,
-        label: Date,
-        required: true}
-      - {widget: relation,
-        name: project,
-        label: Project,
-        required: true,
-        collection: projects,
-        valueField: title,
-        searchFields: ["title"]
-      }
-      - {widget: markdown,
-        name: agenda,
-        label: Agenda,
-      }
-      - {widget: markdown,
-        name: body,
-        label: Notes and action items,
-        required: false
-      }
-  - name: "pages"
-    label: "Pages"
-    files:
-      - file: "src/pages/index.md"
-        label: "Landing Page"
-        name: "index"
-        fields:
-          - {label: "Template Key", name: "templateKey", widget: "hidden", default: "index-page"}
-          - {label: Title, name: title, widget: string}
-          - {label: Image, name: image, widget: image}
-          - {label: Heading, name: heading, widget: string}
-          - {label: Subheading, name: subheading, widget: string}
-          - {label: Mainpitch, name: mainpitch, widget: object, fields: [{label: Title, name: title, widget: string}, {label: Description, name: description, widget: text}]}
-          - {label: Legend, name: body, widget: markdown}
-      - file: "src/pages/about/index.md"
-        label: "About"
-        name: "about"
-        fields:
-          - {label: "Template Key", name: "templateKey", widget: "hidden", default: "about-page"}
-          - {label: "Title", name: "title", widget: "string"}
-          - {label: "Body", name: "body", widget: "markdown"}
-      - file: "src/pages/all-projects.md"
-        label: "Projects"
-        name: "all-projects"
-        fields:
-          - {label: "Template Key", name: "templateKey", widget: "hidden", default: "all-projects-page"}
-          - {label: "Title", name: "title", widget: "string"}
-          - {label: "Body", name: "body", widget: "markdown"}
+    - name: "ideas"
+      label: "Ideas"
+      folder: "src/pages/ideas"
+      create: true
+      slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+      fields:
+          - {
+                label: "Template Key",
+                name: "templateKey",
+                widget: "hidden",
+                default: "blog-post",
+            }
+          - { label: "Question/Title", name: "title", widget: "string" }
+          - { label: "Data status", name: "data-status", widget: "string" }
+          - { label: "Data link", name: "data-link", widget: "string" }
+          - { label: "Data caveats", name: "data-caveats", widget: "string" }
+          - {
+                label: "Program",
+                name: "program",
+                widget: "select",
+                options: ["EMT", "Endo", "Other"],
+            }
+          - { label: "Publish Date", name: "date", widget: "datetime" }
+          - {
+                label: "Type",
+                name: "type",
+                widget: "select",
+                options: ["New idea/question", "Early dataset", "Observation"],
+            }
+          - { label: "Contact", name: "contact", widget: "string" }
+          - { label: "Tags", name: "tags", widget: "list" }
+          - { label: "AICS concerns", name: "concerns", widget: "string" }
+
+    # - name: "datasets"
+    #   label: "Datasets and resources"
+    #   create: true
+    #   folder: "src/pages/datasets"
+    #   slug: "{{project}}-{{link}}"
+    #   fields:
+    #     - {label: "Template Key", name: "templateKey", widget: "hidden", default: "dataset"}
+    #     - {label: Title, name: title, widget: string}
+    #     - {label: Link, name: link, widget: string}
+    #     - {widget: relation,
+    #       name: project,
+    #       label: Project,
+    #       required: true,
+    #       collection: projects,
+    #       valueField: title,
+    #       searchFields: ["title"],
+    #       multiple: false
+    #     }
+    #     - {
+    #       widget: markdown,
+    #       label: Description,
+    #       required: false,
+    #       name: body
+    #     }
+    - name: "people"
+      label: "People"
+      create: true
+      folder: "src/pages/people"
+      slug: "{{name}}"
+      fields:
+          - {
+                label: "Template Key",
+                name: "templateKey",
+                widget: "hidden",
+                default: "people",
+            }
+          - { label: Title/Role, name: title, widget: string }
+          - { label: Full name, name: name, widget: string }
+          - { label: Slack ID, name: slack, widget: string }
+          - { label: Email, name: email, widget: string }
+
+    - name: "pages"
+      label: "Pages"
+      files:
+          - file: "src/pages/index.md"
+            label: "Landing Page"
+            name: "index"
+            fields:
+                - {
+                      label: "Template Key",
+                      name: "templateKey",
+                      widget: "hidden",
+                      default: "index-page",
+                  }
+                - { label: Title, name: title, widget: string }
+                - { label: Image, name: image, widget: image }
+                - { label: Heading, name: heading, widget: string }
+                - { label: Subheading, name: subheading, widget: string }
+                - {
+                      label: Mainpitch,
+                      name: mainpitch,
+                      widget: object,
+                      fields:
+                          [
+                              { label: Title, name: title, widget: string },
+                              {
+                                  label: Description,
+                                  name: description,
+                                  widget: text,
+                              },
+                          ],
+                  }
+                - { label: Legend, name: body, widget: markdown }
+          - file: "src/pages/about/index.md"
+            label: "About"
+            name: "about"
+            fields:
+                - {
+                      label: "Template Key",
+                      name: "templateKey",
+                      widget: "hidden",
+                      default: "about-page",
+                  }
+                - { label: "Title", name: "title", widget: "string" }
+                - { label: "Body", name: "body", widget: "markdown" }
+          - file: "src/pages/all-projects.md"
+            label: "Projects"
+            name: "all-projects"
+            fields:
+                - {
+                      label: "Template Key",
+                      name: "templateKey",
+                      widget: "hidden",
+                      default: "all-projects-page",
+                  }
+                - { label: "Title", name: "title", widget: "string" }
+                - { label: "Body", name: "body", widget: "markdown" }
